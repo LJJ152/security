@@ -1,5 +1,6 @@
 package top.ljjapp.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -17,6 +18,7 @@ import java.util.List;
 public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @JsonView(User.UserSimpleView.class)
     public List<User> query(@RequestParam String username,
                             @PageableDefault(page = 2, size = 15, sort = "username,desc") Pageable pageable){
         List<User> userList = new ArrayList<>();

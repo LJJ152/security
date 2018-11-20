@@ -26,7 +26,7 @@ public class UserControllerTest extends BaseTest {
 
     @Test
     public void whenQuerySuccess() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/user")
+        String result = mockMvc.perform(MockMvcRequestBuilders.get("/user")
                 .param("username", "hahah") //参数
                 //pageable 三个参数
                 .param("page", "5")
@@ -34,6 +34,10 @@ public class UserControllerTest extends BaseTest {
                 .param("sort", "username,desc")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk()) //期望的结果
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3)); //结果码
+                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3)) //结果码
+                .andReturn().getResponse().getContentAsString();
+        ;
+        System.out.println(result);
+
     }
 }
